@@ -1,3 +1,0 @@
--I
-include
--I example/deps/raylib/src
