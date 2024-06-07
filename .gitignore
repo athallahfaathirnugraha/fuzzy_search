@@ -1,0 +1,5 @@
+obj/
+depreq/
+out/
+compile_flags.txt
+.DS_Store
