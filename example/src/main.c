@@ -73,7 +73,7 @@ int main()
         ClearBackground(BLACK);
 
         for (size_t i = 0; i < 20; i++) {
-            Color col = selected[i] ? RAYWHITE : GRAY;
+            Color col = selected[i] ? RAYWHITE : DARKGRAY;
 
             DrawText(array[i], 20, 20 + i * 20, 20, col);
 
