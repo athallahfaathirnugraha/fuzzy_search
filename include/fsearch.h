@@ -4,6 +4,11 @@
 #include <stdlib.h>
 
 int lev_dist(char *a, char *b);
-void fsearch(size_t *out, size_t *out_len);
+
+// the lesser the return value, the closer the match
+size_t fsearch(
+    char *str,
+    char *pat
+);
 
 #endif
