@@ -36,10 +36,11 @@ size_t fsearch(
     char *str,
     char *pat
 ) {
+    size_t str_len = strlen(str);
     size_t min_dist = SIZE_MAX;
     
-    for (size_t i = 0; i < strlen(str); i++) {
-        for (size_t j = i; j < strlen(str); j++) {
+    for (size_t i = 0; i < str_len; i++) {
+        for (size_t j = i; j < str_len; j++) {
             char prev_c = str[j + 1];
             str[j + 1] = '\0';
             int dist = lev_dist(&str[i], pat);
