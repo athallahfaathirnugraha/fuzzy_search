@@ -10,22 +10,28 @@ static int min(int a, int b)
     return a < b ? a : b;
 }
 
-// https://en.wikipedia.org/wiki/Levenshtein_distance#Computing_Levenshtein_distance
-// TODO: optimise (?)
-int lev_dist(char *a, char *b)
+static int lev_dist_(char *a, size_t a_len, char *b, size_t b_len)
 {
-    unsigned long a_len = strlen(a);
-    unsigned long b_len = strlen(b);
-
     if (b_len == 0) return a_len;
     else if (a_len == 0) return b_len;
 
-    if (a[0] == b[0]) return lev_dist(&a[1], &b[1]);
+    if (a[0] == b[0]) return lev_dist_(&a[1], a_len - 1, &b[1], b_len - 1);
 
-    return 1 + min(lev_dist(&a[1], b), min(lev_dist(a, &b[1]), lev_dist(&a[1], &b[1])));
+    return 1 + min(
+        lev_dist_(&a[1], a_len - 1, b, b_len),
+        min(
+            lev_dist_(a, a_len, &b[1], b_len - 1),
+            lev_dist_(&a[1], a_len - 1, &b[1], b_len - 1)
+        )
+    );
 }
 
-// TODO: OPTIMISE!!!
+// https://en.wikipedia.org/wiki/Levenshtein_distance#Computing_Levenshtein_distance
+int lev_dist(char *a, char *b)
+{
+    return lev_dist_(a, strlen(a), b, strlen(b));
+}
+
 size_t fsearch(
     char *str,
     char *pat
