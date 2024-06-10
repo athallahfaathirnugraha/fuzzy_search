@@ -1,7 +1,7 @@
 TESTS := $(wildcard src/*.c)
 OUTS := $(patsubst src/%.c,out/%.test,$(TESTS))
 
-.PHONY: ../out/debug/libfsearch.a all clean clean_libtap
+.PHONY: all clean clean_libtap
 
 all: $(OUTS)
 

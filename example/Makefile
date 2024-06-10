@@ -16,7 +16,7 @@ LFLAGS := -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT
 
 DEPS := deps/raylib/src/libraylib.a ../out/release/libfsearch.a
 
-.PHONY: ../out/release/libfsearch.a clean_all clean_raylib clean
+.PHONY: clean_all clean_raylib clean
 
 out/$(TAR_DIR)/example: $(DEPREQ) $(OBJS) $(DEPS)
 	@echo "creating executable ($@)"
