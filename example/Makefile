@@ -16,7 +16,7 @@ LFLAGS := -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT
 
 DEPS := deps/raylib/src/libraylib.a ../out/release/libfsearch.a
 
-.PHONY: clean_all clean_raylib clean
+.PHONY: ../out/release/libfsearch.a clean_all clean_raylib clean
 
 out/$(TAR_DIR)/example: $(DEPREQ) $(OBJS) $(DEPS)
 	@echo "creating executable ($@)"
@@ -32,6 +32,9 @@ depreq/$(TAR_DIR)/%.d: src/%.c
 	gcc $(CFLAGS) -MM $< >> $@
 
 -include $(DEPREQ)
+
+../out/release/libfsearch.a:
+	cd .. && make RELEASE=1
 
 obj/$(TAR_DIR)/%.o: src/%.c depreq/$(TAR_DIR)/%.d
 	@echo "creating object file $@"
