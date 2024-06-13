@@ -3,7 +3,8 @@
 
 void func()
 {
-    fsearch("consectetur", "consectetur");
+    char str[] = "consectetur";
+    fsearch(str, "consectetur");
 }
 
 int main()
