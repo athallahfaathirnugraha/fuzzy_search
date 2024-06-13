@@ -24,9 +24,9 @@ void bench(void (*func)(), int iter_num)
     }
 
     printf("iter num: %d\n", iter_num);
-    printf("best time: %f\n", best);
-    printf("average time: %f\n", sum / iter_num);
-    printf("worst time: %f\n", worst);
+    printf("best time: %f s (%f ms)\n", best, best * 1000);
+    printf("average time: %f s (%f ms)\n", sum / iter_num, sum / iter_num * 1000);
+    printf("worst time: %f s (%f ms)\n", worst, worst * 1000);
 }
 
 #endif
