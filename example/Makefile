@@ -33,6 +33,9 @@ depreq/$(TAR_DIR)/%.d: src/%.c
 
 -include $(DEPREQ)
 
+../out/release/libfsearch.a:
+	cd .. && make RELEASE=1
+
 obj/$(TAR_DIR)/%.o: src/%.c depreq/$(TAR_DIR)/%.d
 	@echo "creating object file $@"
 	mkdir -p $(dir $@)

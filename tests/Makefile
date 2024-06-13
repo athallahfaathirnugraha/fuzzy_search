@@ -10,7 +10,11 @@ out/%.test: src/%.c ../out/debug/libfsearch.a deps/libtap/libtap.a
 	mkdir -p $(dir $@)
 	gcc $< deps/libtap/libtap.a ../out/debug/libfsearch.a -I ../include -I deps/libtap -DDEBUG -g -o $@
 
+../out/debug/libfsearch.a:
+	cd .. && make
+
 deps/libtap/libtap.a:
+	@echo "creating libtap"
 	cd deps/libtap && \
 	make
 
