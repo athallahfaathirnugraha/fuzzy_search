@@ -4,7 +4,12 @@
 int main()
 {
     plan(1);
-    lives_ok({ fsearch("consectetur", "consectetur"); });
+
+    lives_ok({
+        char str[] = "consectetur";
+        fsearch(str, "consectetur");
+    });
+
     done_testing();
     return 0;
 }

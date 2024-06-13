@@ -26,6 +26,7 @@ int lev_dist(char *a, char *b)
 }
 
 // TODO: OPTIMISE!!!
+// do not pass const/static strings to str
 size_t fsearch(
     char *str,
     char *pat
