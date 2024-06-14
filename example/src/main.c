@@ -44,9 +44,13 @@ int main()
     InitWindow(400, 600, "example");
 
     while (!WindowShouldClose()) {
+        int pressed = 0;
+        
         int key = GetCharPressed();
 
         while (key > 0) {
+            pressed = 1;
+            
             if (key >= 32 && key <= 125 && search_i <= 1023) {
                 search[search_i] = (char)key;
                 search_i++;
@@ -56,12 +60,13 @@ int main()
         }
 
         if (IsKeyPressed(KEY_BACKSPACE) && search_i > 0) {
+            pressed = 1;
             memset(search, '\0', sizeof(search));
             search_i = 0;
         }
 
-        // if search is not empty
-        if (search[0] != '\0') {
+        // if search is not empty && changed search
+        if (search[0] != '\0' && pressed) {
             for (size_t i = 0; i < 20; i++) {
                 searchv[i] = fsearch(array[i], search);
                 selected[i] = searchv[i] < CUTOFF;
