@@ -23,10 +23,10 @@ void bench(void (*func)(), int iter_num)
         if (dur > worst) worst = dur;
     }
 
-    printf("iter num: %d\n", iter_num);
-    printf("best time: %f s (%f ms)\n", best, best * 1000);
-    printf("average time: %f s (%f ms)\n", sum / iter_num, sum / iter_num * 1000);
-    printf("worst time: %f s (%f ms)\n", worst, worst * 1000);
+    printf("iter num:\t%d\n", iter_num);
+    printf("best time:\t%f s\t(%f ms)\n", best, best * 1000);
+    printf("average time:\t%f s\t(%f ms)\n", sum / iter_num, sum / iter_num * 1000);
+    printf("worst time:\t%f s\t(%f ms)\n", worst, worst * 1000);
 }
 
 #endif
