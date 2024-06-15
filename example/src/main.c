@@ -66,12 +66,14 @@ int main()
         }
 
         // if search is not empty && changed search
+        if (pressed) memset(selected, 0, sizeof(selected));
+        
         if (search[0] != '\0' && pressed) {
             for (size_t i = 0; i < 20; i++) {
                 searchv[i] = fsearch(array[i], search);
                 selected[i] = searchv[i] < CUTOFF;
             }
-        } else memset(selected, 1, sizeof(selected));
+        };
         
         BeginDrawing();
 
