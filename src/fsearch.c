@@ -47,6 +47,7 @@ int lev_dist(char *a, char *b)
 }
 
 // do not pass const/static strings to str
+// returns a size_t. the closer the return value, the closer the match
 size_t fsearch(
     char *str,
     char *pat
