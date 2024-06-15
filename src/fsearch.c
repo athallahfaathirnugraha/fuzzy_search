@@ -5,24 +5,45 @@
 #include <string.h>
 #include <limits.h>
 
+static int max(int a, int b)
+{
+    return a > b ? a : b;
+}
+
 static int min(int a, int b)
 {
     return a < b ? a : b;
 }
 
-// https://en.wikipedia.org/wiki/Levenshtein_distance#Computing_Levenshtein_distance
-// TODO: optimise (?)
-int lev_dist(char *a, char *b)
+static int lev_dist_(char *a, size_t a_len, char *b, size_t b_len)
 {
-    unsigned long a_len = strlen(a);
-    unsigned long b_len = strlen(b);
-
     if (b_len == 0) return a_len;
     else if (a_len == 0) return b_len;
 
-    if (a[0] == b[0]) return lev_dist(&a[1], &b[1]);
+    if (a[0] == b[0]) return lev_dist_(&a[1], a_len - 1, &b[1], b_len - 1);
 
-    return 1 + min(lev_dist(&a[1], b), min(lev_dist(a, &b[1]), lev_dist(&a[1], &b[1])));
+    int tat = lev_dist_(&a[1], a_len - 1, &b[1], b_len - 1);
+    int atail;
+    int btail;
+
+    if (a[1] == b[0]) {
+        if (a_len - 1 == b_len) atail = tat;
+        else atail = 1 + tat;
+    } else atail = 2 + tat;
+
+    if (a[0] == b[1]) {
+        if (a_len == b_len - 1) btail = tat;
+        else btail = 1 + tat;
+    } else btail = 2 + tat;
+
+    return min(tat + 1, min(atail, btail));
+}
+
+// https://en.wikipedia.org/wiki/Levenshtein_distance#Computing_Levenshtein_distance
+// basic operations: insertion, deletion, substitution
+int lev_dist(char *a, char *b)
+{
+    return lev_dist_(a, strlen(a), b, strlen(b));
 }
 
 // TODO: OPTIMISE!!!
@@ -31,10 +52,11 @@ size_t fsearch(
     char *str,
     char *pat
 ) {
+    size_t str_len = strlen(str);
     size_t min_dist = SIZE_MAX;
     
-    for (size_t i = 0; i < strlen(str); i++) {
-        for (size_t j = i; j < strlen(str); j++) {
+    for (size_t i = 0; i < str_len; i++) {
+        for (size_t j = i; j < str_len; j++) {
             char prev_c = str[j + 1];
             str[j + 1] = '\0';
             int dist = lev_dist(&str[i], pat);
