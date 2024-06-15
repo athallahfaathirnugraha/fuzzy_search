@@ -6,7 +6,7 @@ This is a library for fuzzy search. Matching a string uses its Levenshtein dista
 
 Code example:
 
-```
+```c
 size_t close_match = 3;
 
 char str[] = "consectet";
